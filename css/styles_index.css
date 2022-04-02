@@ -75,7 +75,7 @@
     scroll-behavior: smooth;
   }
 }
-
+html,
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -3938,6 +3938,7 @@ textarea.form-control-lg {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
+
 }
 
 .nav-link {
@@ -4036,6 +4037,7 @@ textarea.form-control-lg {
   justify-content: space-between;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  min-height: 10vh;
 }
 .navbar > .container,
 .navbar > .container-fluid,
@@ -11433,6 +11435,7 @@ html {
 .startscreen {
   padding-top: calc(6rem + 74px);
   padding-bottom: 6rem;
+  min-height: 93vh;
 }
 .startscreen .startscreen-heading {
   font-size: 2.75rem;
@@ -11461,4 +11464,5 @@ html {
 
 .copyright {
   background-color: #1a252f;
+  min-height: 7vh;
 }
