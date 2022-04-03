@@ -127,19 +127,15 @@
         <!-- Google fonts-->
         <link href="css/fonts.css" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles_index.css" rel="stylesheet" />
+        <link href="css/style.css" rel="stylesheet" />
     </head>
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container" style="justify-content: flex-start">
-                <?php 
-                if (($SITE == 'scan')||($SITE == 'code')||($SITE == 'control')){
-                    echo'<a class="navbar-brand" href="index.php"><img class="startscreen-avatar" style="height: 3rem" src="assets/img/only_logo_white.svg" alt="Lithernet" /></a>';
-                }
-                ?>
-                <a class="nav-link py-3 px-0 px-lg-3 rounded text-white" href="index.php?site=scan">Scan</a>
-                <a class="nav-link py-3 px-0 px-lg-3 rounded text-white" href="index.php?site=code">Enter Code</a>
+                <a class="navbar-brand" href="index.php"><img class="startscreen-avatar" style="height: 3rem" src="assets/img/only_logo_white.svg" alt="Lithernet" /></a>
+                <a class="nav-link py-3 px-lg-5 rounded text-white" href="index.php?site=scan"> Scan </a>
+                <a class="nav-link py-3 px-lg-5 rounded text-white" href="index.php?site=code"> Enter Code </a>
             </div>
         </nav>
         <!-- startscreen-->
@@ -176,7 +172,10 @@
                 <div class="container" style="width: 45vw" id="reader"></div>
                 <div class="text-center mt-4">
                 <form action="index.php?site=control" method="post" id="scanform">
-                    <label for="scan_code" style="padding-right: 1rem">Result:</label><input class="btn btn-xl btn-outline-light" type="text" id="scan_code" name="scan_code" readonly="readonly" value=""><br><br>
+                    <table style="margin: 0 auto; min-width: 3vw;">
+                        <tr><td><label for="scan_code" style="padding-right: 1rem">Result:</label></td><td><input class="btn btn-xl btn-outline-light" type="text" id="scan_code" name="scan_code" readonly="readonly" value=""></td></tr>
+                    </table>
+                    <br><br>
                     <input class="btn btn-xl btn-outline-light" type="Submit" name="send" value="send">
                 </form>
                 </div>
@@ -230,7 +229,9 @@
                     echo'<form action="index.php?site=control" method="post">
                             <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'"><br><br>
                             <input type="hidden" name="run" id="run" value="1"><br><br>
-                            <label for="level" style="padding-right: 1rem">Level:</label><input type="range" sytle="width: 21%" id="level" name="level" min="0" max="255" step="1" value="'.$LEVEL.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" id="sl_level" name="sl_level">'.$LEVEL.'</output><br><br>
+                            <table style="margin: 0 auto; min-width: 3vw;">
+                                <tr><td><label for="level" style="padding-right: 1rem">Level:</label></td><td><input type="range" sytle="width: 21%" id="level" name="level" min="0" max="255" step="1" value="'.$LEVEL.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" id="sl_level" name="sl_level">'.$LEVEL.'</output></td></tr>
+                            </table><br><br>
                             <input class="btn btn-xl btn-outline-light" type="Submit" name="send" value="send">
                         </form>';
                     break;
@@ -238,10 +239,11 @@
                     echo'<form action="index.php?site=control" method="post">
                             <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'"><br><br>
                             <input type="hidden" name="run" id="run" value="1"><br><br>
-                            <label for="level" style="padding-right: 1rem">Level:</label><input type="range" sytle="width: 21%" id="level" name="level" min="0" max="255" step="1" value="'.$LEVEL.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" id="sl_level" name="sl_level">'.$LEVEL.'</output><br><br>
-                            <br><br>
-                            <label for="tc" style="padding-right: 1rem">Tc:</label><input type="range" sytle="width: 21%" id="tc" name="tc" min="0" max="255" step="1" value="'.$TC.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" for="tc">'.$TC.'</output><br><br>
-                            <br><br>
+                            <table style="margin: 0 auto; min-width: 3vw;">
+                                <tr><td><label for="level" style="padding-right: 1rem">Level:</label></td><td><input type="range" sytle="width: 21%" id="level" name="level" min="0" max="255" step="1" value="'.$LEVEL.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" id="sl_level" name="sl_level">'.$LEVEL.'</output></td></tr>
+                                <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                <tr><td><label for="tc" style="padding-right: 1rem">Tc:</label></td><td><input type="range" sytle="width: 21%" id="tc" name="tc" min="0" max="255" step="1" value="'.$TC.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" for="tc">'.$TC.'</output></td></tr>
+                            </table><br><br>
                             <input class="btn btn-xl btn-outline-light" type="Submit" name="send" value="send">
                         </form>';
                     break;
@@ -249,13 +251,14 @@
                     echo'<form action="index.php?site=control" method="post">
                             <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'"><br><br>
                             <input type="hidden" name="run" id="run" value="1"><br><br>
-                            <label for="level" style="padding-right: 1rem">Level:</label><input type="range" sytle="width: 21%" id="level" name="level" min="0" max="255" step="1" value="'.$LEVEL.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" id="sl_level" name="sl_level">'.$LEVEL.'</output><br><br>
-                            <br><br>
-                            <label for="red" style="padding-right: 1rem">Red:</label><input type="range" sytle="width: 21%" id="red" name="red" min="0" max="255" step="1" value="'.$RED.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" for="red">'.$RED.'</output><br><br>
-                            <label for="green" style="padding-right: 1rem">Green:</label><input type="range" sytle="width: 21%" id="green" name="green" min="0" max="255" step="1" value="'.$GREEN.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" for="green">'.$GREEN.'</output><br><br>
-                            <label for="blue" style="padding-right: 1rem">Blue:</label><input type="range" sytle="width: 21%" id="blue" name="blue" min="0" max="255" step="1" value="'.$BLUE.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" for="blue">'.$BLUE.'</output><br><br>
-                            <label for="white" style="padding-right: 1rem">White:</label><input type="range" sytle="width: 21%" id="white" name="white" min="0" max="255" step="1" value="'.$WHITE.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" for="white">'.$WHITE.'</output><br><br>
-                            <br><br>
+                            <table style="margin: 0 auto; min-width: 3vw;">
+                                <tr><td><label for="level" style="padding-right: 1rem">Level:</label></td><td><input type="range" sytle="width: 21%" id="level" name="level" min="0" max="255" step="1" value="'.$LEVEL.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" id="sl_level" name="sl_level">'.$LEVEL.'</output></td></tr>
+                                <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                <tr><td><label for="red" style="padding-right: 1rem">Red:</label></td><td><input type="range" sytle="width: 21%" id="red" name="red" min="0" max="255" step="1" value="'.$RED.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" for="red">'.$RED.'</output></td></tr>
+                                <tr><td><label for="green" style="padding-right: 1rem">Green:</label></td><td><input type="range" sytle="width: 21%" id="green" name="green" min="0" max="255" step="1" value="'.$GREEN.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" for="green">'.$GREEN.'</output></td></tr>
+                                <tr><td><label for="blue" style="padding-right: 1rem">Blue:</label></td><td><input type="range" sytle="width: 21%" id="blue" name="blue" min="0" max="255" step="1" value="'.$BLUE.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" for="blue">'.$BLUE.'</output></td></tr>
+                                <tr><td><label for="white" style="padding-right: 1rem">White:</label></td><td><input type="range" sytle="width: 21%" id="white" name="white" min="0" max="255" step="1" value="'.$WHITE.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" for="white">'.$WHITE.'</output></td></tr>
+                            </table><br><br>
                             <input class="btn btn-xl btn-outline-light" type="Submit" name="send" value="send">
                         </form>';
                     break;                    

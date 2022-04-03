@@ -10,5 +10,5 @@
     $lithernet_base_ip = "192.168.1.255";
     $lithernet_base_port = "10009";
 
-    $operation_mode = "run"; //demo = keine UDP Aussendung
+    $operation_mode = "demo"; //demo = keine UDP Aussendung
 ?>
