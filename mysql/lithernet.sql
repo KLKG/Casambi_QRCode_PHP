@@ -40,9 +40,7 @@ CREATE TABLE `qrcodes` (
 --
 
 INSERT INTO `qrcodes` (`code`, `code_type`, `lithernet_id`, `target_type`, `target_id`) VALUES
-('9115e1d7fd', 0, 255, 0, 0),
-('ab12', 2, 0, 0, 0),
-('abcd', 1, 255, 0, 0);
+('9115e1d7fd', 0, 255, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -65,9 +63,7 @@ CREATE TABLE `qrcode_level` (
 --
 
 INSERT INTO `qrcode_level` (`code`, `level`, `red`, `green`, `blue`, `white`, `tc`) VALUES
-('9115e1d7fd', 0, 0, 0, 0, 0, 0),
-('ab12', 0, 0, 0, 0, 0, 0),
-('abcd', 51, 0, 0, 0, 0, 0);
+('9115e1d7fd', 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
