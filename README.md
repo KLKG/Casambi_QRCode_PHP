@@ -76,3 +76,10 @@ Device => 1-250
 Group => 0 = ungrouped, 1-255 = Group
 Scene => 1-255 = Group
 ```
+
+```
+config/config.php
+
+$operation_mode = "demo"; //demo = no UDP Commands send
+$operation_mode = "run"; //run = UDP Commands send to gateway
+```
