@@ -36,12 +36,20 @@ If you want to get more informations / see an demo just contact us. (http://casa
 
 Sample images:
 
-![Control Level](sample_images/9115e1d7fd.png)
-
-![Control Tc + Level](sample_images/d1fac824f2.png)
-
-![Control RGBW + Level](sample_images/2673ef1c96.png)
-
+<table>
+<tr>
+<td>![Control Level](sample_images/9115e1d7fd.png)</td>
+<td>Show Level Control in Demo</td>
+</tr>
+<tr>
+<td>![Control Tc + Level](sample_images/d1fac824f2.png)</td>
+<td>Show Tc + Level Control in Demo</td>
+</tr>
+<tr>
+<td>![Control RGBW + Level](sample_images/2673ef1c96.png)</td>
+<td>Show RGBW + Level Control in Demo</td>
+</tr>
+</table>
 
 --------------------------------------------------------------------------------------
 
