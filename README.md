@@ -5,6 +5,7 @@ With this tool you can generate and manage QR codes to control a Casambi-based l
 Requires an SSL connection for the webcam under Chrome.
 
 --------------------------------------------------------------------------------------
+
 Used Components:
 
 Freelancer:<br/>
@@ -20,9 +21,30 @@ PHP QR Code:<br/>
 LGPL Licensed
 
 Font Awesome Basic:<br/>
-[fontawesome](https://fontawesome.com/)
+[fontawesome](https://fontawesome.com/)<br/>
 
 --------------------------------------------------------------------------------------
+
+We are not web designers and are happy about every hint / help that advances this small project.
+Our goal is to give a little food for thought for the possibilities of our gateway.
+
+Feel free to develop the project further. As part of our possibilities, we will also do some fine-tuning.
+
+If you want to get more informations / see an demo just contact us. (http://casambi.lithernet.de)
+
+--------------------------------------------------------------------------------------
+
+Sample images:
+
+![Control Level](sample_images/9115e1d7fd.png)
+
+![Control Tc + Level](sample_images/d1fac824f2.png)
+
+![Control RGBW + Level](sample_images/2673ef1c96.png)
+
+
+--------------------------------------------------------------------------------------
+
 ```
 Code Type:
 0 = Empty
@@ -44,11 +66,3 @@ Device => 1-250
 Group => 0 = ungrouped, 1-255 = Group
 Scene => 1-255 = Group
 ```
---------------------------------------------------------------------------------------
-
-We are not web designers and are happy about every hint / help that advances this small project.
-Our goal is to give a little food for thought for the possibilities of our gateway.
-
-Feel free to develop the project further. As part of our possibilities, we will also do some fine-tuning.
-
-If you want to get more informations / see an demo just contact us. (http://casambi.lithernet.de)
