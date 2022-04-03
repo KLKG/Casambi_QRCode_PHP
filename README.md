@@ -30,7 +30,9 @@ Our goal is to give a little food for thought for the possibilities of our gatew
 
 Feel free to develop the project further. As part of our possibilities, we will also do some fine-tuning.
 
-If you want to get more informations / see an demo just contact us. (http://casambi.lithernet.de)
+If you want to get more informations / see an demo just contact us. 
+
+More Informations: (https://casambi.lithernet.de)
 
 --------------------------------------------------------------------------------------
 
