@@ -18,6 +18,9 @@ Apache-2.0 License
 PHP QR Code:
 http://phpqrcode.sourceforge.net/
 LGPL Licensed
+
+Font Awesome Basic:
+https://fontawesome.com/
 --------------------------------------------------------------------------------------
 ```
 Code Type:
