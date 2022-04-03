@@ -7,19 +7,19 @@ Requires an SSL connection for the webcam under Chrome.
 --------------------------------------------------------------------------------------
 Used Components:
 
-Freelancer:
-[startbootstrap](http://startbootstrap.com)
+Freelancer:<br/>
+[startbootstrap](http://startbootstrap.com)<br/>
 MIT license
 
-Html5-QRCode:
-[GitHub](https://github.com/mebjas/html5-qrcode)
+Html5-QRCode:<br/>
+[GitHub](https://github.com/mebjas/html5-qrcode)<br/>
 Apache-2.0 License
 
-PHP QR Code:
-[sourceforge](http://phpqrcode.sourceforge.net/)
+PHP QR Code:<br/>
+[sourceforge](http://phpqrcode.sourceforge.net/)<br/>
 LGPL Licensed
 
-Font Awesome Basic:
+Font Awesome Basic:<br/>
 [fontawesome](https://fontawesome.com/)
 
 --------------------------------------------------------------------------------------
