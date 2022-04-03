@@ -1,39 +1,50 @@
 # Casambi_QRCode_PHP
-QR Code Scanner in PHP
 
-Benötigt unter Chrome eine SSL Verbindung für die Webcam.
+With this tool you can generate and manage QR codes to control a Casambi-based light control locally in the network via the Lithernet Casambi Gateway.
+
+Requires an SSL connection for the webcam under Chrome.
 
 --------------------------------------------------------------------------------------
-
-Bestandteile:
+Used Components:
 
 Freelancer:
-Freelance is a free to use, MIT licensed Bootstrap theme created by
-<a href="http://startbootstrap.com">Start Bootstrap</a>
+http://startbootstrap.com
+MIT license
 
 Html5-QRCode:
-A cross platform HTML5 QR code reader.
-<a href="https://github.com/mebjas/html5-qrcode">Html5-QRCode</a>
+https://github.com/mebjas/html5-qrcode
 Apache-2.0 License
 
+PHP QR Code:
+http://phpqrcode.sourceforge.net/
+LGPL Licensed
 --------------------------------------------------------------------------------------
-
+```
 Code Type:
 0 = Empty
 1 = Level
 2 = Tc
 3 = RGBW
-
+```
+```
 Target Type:
 0 = Broadcast
 1 = Device
 2 = Group
 4 = Scene
-
+```
+```
 Target ID:
 Broadcast => 0
 Device => 1-250
 Group => 0 = ungrouped, 1-255 = Group
 Scene => 1-255 = Group
-
+```
 --------------------------------------------------------------------------------------
+
+We are not web designers and are happy about every hint / help that advances this small project.
+Our goal is to give a little food for thought for the possibilities of our gateway.
+
+Feel free to develop the project further. As part of our possibilities, we will also do some fine-tuning.
+
+If you want to get more informations / see an demo just contact us. (http://casambi.lithernet.de)
