@@ -4,7 +4,7 @@
 
     $db_host = "localhost";
     $db_user = "lithernet";
-    $db_password = "CiILWCSMM3VVnbBE";
+    $db_password = "";
     $db_database = "lithernet";
 
     $lithernet_base_ip = "192.168.1.255";
