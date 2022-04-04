@@ -4,13 +4,9 @@ With this tool you can generate and manage QR codes to control a Casambi-based l
 
 Requires an SSL connection for the webcam under Chrome.
 
-1) https://github.com/KLKG/Casambi_QRCode_PHP#used-components
-2) https://github.com/KLKG/Casambi_QRCode_PHP#over-the-project
-3) https://github.com/KLKG/Casambi_QRCode_PHP#user-interface
-4) https://github.com/KLKG/Casambi_QRCode_PHP#admin-interface
-5) https://github.com/KLKG/Casambi_QRCode_PHP#sample-qr-code-images
-6) https://github.com/KLKG/Casambi_QRCode_PHP#random-stuff-nice-to-know
+--------------------------------------------------------------------------------------
 
+## Topics
 1. [Used Components](#used-components)
 2. [About the project](#about-the-project)
 3. [User Interface](#user-interface)
