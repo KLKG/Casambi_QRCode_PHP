@@ -40,28 +40,34 @@ User Interface:
 
 <table>
 <tr>
+<th>Screenshot 1</th>
+<th>Screenshot 2</td>
+<th>Description</th>
+</tr>
+<tr>
+<tr>
 <td>&nbsp;</td>
-<td><img src="sample_images/1_startscreen.png"></td>
+<td><img src="sample_images/1_startscreen.png" style="width: 50%; height: 50%"></td>
 <td>startscreen</td>
 </tr>
 <tr>
-<td><img src="sample_images/2_1_scan.png"></td>
-<td><img src="sample_images/2_2_enter.png"></td>
+<td><img src="sample_images/2_1_scan.png" style="width: 50%; height: 50%"></td>
+<td><img src="sample_images/2_2_enter.png" style="width: 50%; height: 50%"></td>
 <td>scan the code, or enter the number by hand</td>
 </tr>
 <tr>
 <td>&nbsp;</td>
-<td><img src="sample_images/3_1_level.png"></td>
+<td><img src="sample_images/3_1_level.png" style="width: 50%; height: 50%"></td>
 <td>control level</td>
 </tr>
 <tr>
 <td>&nbsp;</td>
-<td><img src="sample_images/3_2_tc.png"></td>
+<td><img src="sample_images/3_2_tc.png" style="width: 50%; height: 50%"></td>
 <td>control tc + level</td>
 </tr>
 <tr>
 <td>&nbsp;</td>
-<td><img src="sample_images/3_3_rgbw.png"></td>
+<td><img src="sample_images/3_3_rgbw.png" style="width: 50%; height: 50%"></td>
 <td>control rgbw + level</td>
 </tr>
 </table>
@@ -72,19 +78,28 @@ Admin Interface:
 
 <table>
 <tr>
-<td><img src="sample_images/4_admin_login.png"></td>
+<th>Screenshot 1</th>
+<th>Screenshot 2</td>
+<th>Description</th>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td><img src="sample_images/4_admin_login.png" style="width: 50%; height: 50%"></td>
 <td>login screen</td>
 </tr>
 <tr>
-<td><img src="sample_images/5_admin_start.png"></td>
+<td>&nbsp;</td>
+<td><img src="sample_images/5_admin_start.png" style="width: 50%; height: 50%"></td>
 <td>startscreen after login</td>
 </tr>
 <tr>
-<td><img src="sample_images/6_admin_list.png"></td>
+<td>&nbsp;</td>
+<td><img src="sample_images/6_admin_list.png" style="width: 50%; height: 50%"></td>
 <td>show all created codes</td>
 </tr>
 <tr>
-<td><img src="sample_images/7_admin_edit.png"></td>
+<td>&nbsp;</td>
+<td><img src="sample_images/7_admin_edit.png" style="width: 50%; height: 50%"></td>
 <td>edit settings from an code</td>
 </tr>
 </table>
