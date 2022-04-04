@@ -36,7 +36,62 @@ More Informations: (https://casambi.lithernet.de)
 
 --------------------------------------------------------------------------------------
 
-Sample images:
+User Interface:
+
+<table>
+<tr>
+<td>&nbsp;</td>
+<td><img src="sample_images/1_startscreen.png"></td>
+<td>startscreen</td>
+</tr>
+<tr>
+<td><img src="sample_images/2_1_scan.png"></td>
+<td><img src="sample_images/2_2_enter.png"></td>
+<td>scan the code, or enter the number by hand</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td><img src="sample_images/3_1_level.png"></td>
+<td>control level</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td><img src="sample_images/3_2_tc.png"></td>
+<td>control tc + level</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td><img src="sample_images/3_3_rgbw.png"></td>
+<td>control rgbw + level</td>
+</tr>
+</table>
+
+--------------------------------------------------------------------------------------
+
+Admin Interface:
+
+<table>
+<tr>
+<td><img src="sample_images/4_admin_login.png"></td>
+<td>login screen</td>
+</tr>
+<tr>
+<td><img src="sample_images/5_admin_start.png"></td>
+<td>startscreen after login</td>
+</tr>
+<tr>
+<td><img src="sample_images/6_admin_list.png"></td>
+<td>show all created codes</td>
+</tr>
+<tr>
+<td><img src="sample_images/7_admin_edit.png"></td>
+<td>edit settings from an code</td>
+</tr>
+</table>
+
+--------------------------------------------------------------------------------------
+
+Sample QR Code images:
 
 <table>
 <tr>
