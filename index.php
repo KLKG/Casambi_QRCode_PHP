@@ -64,6 +64,12 @@
             $SCENE = 0;
         }
 
+        if (isset( $_POST['type'])){
+            $TYPE = cleanSite($_POST['type']);
+        }else{
+            $TYPE = 0;
+        }
+
         $db_link = mysqli_connect($db_host, $db_user, $db_password, $db_database);
 
         if($db_link === false){
@@ -97,8 +103,23 @@
             }
             if ($operation_mode != "demo"){
                 socket_set_option($sock, SOL_SOCKET, SO_BROADCAST, 1); 
-                $message = buildcasambiString($code_type, $lithernet_id, $target_type, $target_id, $LEVEL, $RED, $GREEN, $BLUE, $WHITE, $TC, $SCENE);
-                socket_sendto($sock, $message, 100 , 0 , $lithernet_base_ip , $lithernet_base_port);
+
+                if ($TYPE == "level"){
+                    $message = buildcasambiString(1, $lithernet_id, $target_type, $target_id, $LEVEL, $RED, $GREEN, $BLUE, $WHITE, $TC, $SCENE);
+                    socket_sendto($sock, $message, 100 , 0 , $lithernet_base_ip , $lithernet_base_port);
+                }
+                if ($TYPE == "tc"){
+                    $message = buildcasambiString(2, $lithernet_id, $target_type, $target_id, $LEVEL, $RED, $GREEN, $BLUE, $WHITE, $TC, $SCENE);
+                    socket_sendto($sock, $message, 100 , 0 , $lithernet_base_ip , $lithernet_base_port);
+                }
+                if($TYPE == "rgbw"){
+                    $message = buildcasambiString(3, $lithernet_id, $target_type, $target_id, $LEVEL, $RED, $GREEN, $BLUE, $WHITE, $TC, $SCENE);
+                    socket_sendto($sock, $message, 100 , 0 , $lithernet_base_ip , $lithernet_base_port);
+                }
+                if($TYPE == "scene"){
+                    $message = buildcasambiString(4, $lithernet_id, $target_type, $target_id, $LEVEL, $RED, $GREEN, $BLUE, $WHITE, $TC, $SCENE);
+                    socket_sendto($sock, $message, 100 , 0 , $lithernet_base_ip , $lithernet_base_port);
+                }
                 socket_close($sock);
             }
         }else{
@@ -232,50 +253,62 @@
                     echo "No valid code or control type found.";
                     break;
                 case 1://Level
-                    echo'<form action="index.php?site=control" method="post">
-                            <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'"><br><br>
-                            <input type="hidden" name="run" id="run" value="1"><br><br>
+                    echo'   <br><br>
                             <table style="margin: 0 auto; min-width: 3vw;">
-                                <tr><td><label for="level" style="padding-right: 1rem">Level:</label></td><td><input type="range" sytle="width: 21%" id="level" name="level" min="0" max="255" step="1" value="'.$LEVEL.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" id="sl_level" name="sl_level">'.$LEVEL.'</output></td></tr>
-                            </table><br><br>
-                            <input class="btn btn-xl btn-outline-light" type="Submit" name="send" value="send">
-                        </form>';
+                                <form name="doit_level" action="index.php?site=control" method="post" target="hidden-form">
+                                    <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'">
+                                    <input type="hidden" name="run" id="run" value="1">   
+                                    <input type="hidden" name="type" id="type" value="level">                             
+                                    <tr><td><label for="level" style="padding-right: 1rem">Level:</label></td><td><input type="range" sytle="width: 21%" id="level" name="level" min="0" max="254" step="1" value="'.$LEVEL.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_level\'].submit()"><output style="padding-left: 1rem" id="sl_level" name="sl_level">'.$LEVEL.'</output></td></tr>
+                                </form>
+                            </table><br><br>';
                     break;
                 case 2://TC
-                    echo'<form action="index.php?site=control" method="post">
-                            <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'"><br><br>
-                            <input type="hidden" name="run" id="run" value="1"><br><br>
+                    echo'   <br><br>
                             <table style="margin: 0 auto; min-width: 3vw;">
-                                <tr><td><label for="level" style="padding-right: 1rem">Level:</label></td><td><input type="range" sytle="width: 21%" id="level" name="level" min="0" max="255" step="1" value="'.$LEVEL.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" id="sl_level" name="sl_level">'.$LEVEL.'</output></td></tr>
+                                <form name="doit_level" action="index.php?site=control" method="post" target="hidden-form">
+                                    <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'">
+                                    <input type="hidden" name="run" id="run" value="1">
+                                    <input type="hidden" name="type" id="type" value="level">
+                                    <tr><td><label for="level" style="padding-right: 1rem">Level:</label></td><td><input type="range" sytle="width: 21%" id="level" name="level" min="0" max="254" step="1" value="'.$LEVEL.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_level\'].submit()"><output style="padding-left: 1rem" id="sl_level" name="sl_level">'.$LEVEL.'</output></td></tr>
+                                </form>
                                 <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                <tr><td><label for="tc" style="padding-right: 1rem">Tc:</label></td><td><input type="range" sytle="width: 21%" id="tc" name="tc" min="0" max="255" step="1" value="'.$TC.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" for="tc">'.$TC.'</output></td></tr>
-                            </table><br><br>
-                            <input class="btn btn-xl btn-outline-light" type="Submit" name="send" value="send">
-                        </form>';
+                                <form name="doit_tc" action="index.php?site=control" method="post" target="hidden-form">
+                                    <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'">
+                                    <input type="hidden" name="run" id="run" value="1">
+                                    <input type="hidden" name="type" id="type" value="tc">
+                                    <tr><td><label for="tc" style="padding-right: 1rem">Tc:</label></td><td><input type="range" sytle="width: 21%" id="tc" name="tc" min="0" max="255" step="1" value="'.$TC.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_tc\'].submit()"><output style="padding-left: 1rem" for="tc">'.$TC.'</output></td></tr>
+                                </form>
+                            </table><br><br>';
                     break;
                 case 3://RGBW
-                    echo'<form action="index.php?site=control" method="post">
-                            <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'"><br><br>
-                            <input type="hidden" name="run" id="run" value="1"><br><br>
+                    echo'   <br><br>
                             <table style="margin: 0 auto; min-width: 3vw;">
-                                <tr><td><label for="level" style="padding-right: 1rem">Level:</label></td><td><input type="range" sytle="width: 21%" id="level" name="level" min="0" max="255" step="1" value="'.$LEVEL.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" id="sl_level" name="sl_level">'.$LEVEL.'</output></td></tr>
+                                <form name="doit_level" action="index.php?site=control" method="post" target="hidden-form">
+                                    <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'">
+                                    <input type="hidden" name="run" id="run" value="1">
+                                    <input type="hidden" name="type" id="type" value="level">
+                                    <tr><td><label for="level" style="padding-right: 1rem">Level:</label></td><td><input type="range" sytle="width: 21%" id="level" name="level" min="0" max="254" step="1" value="'.$LEVEL.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_level\'].submit()"><output style="padding-left: 1rem" id="sl_level" name="sl_level">'.$LEVEL.'</output></td></tr>
+                                </form>
                                 <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                <tr><td><label for="red" style="padding-right: 1rem">Red:</label></td><td><input type="range" sytle="width: 21%" id="red" name="red" min="0" max="255" step="1" value="'.$RED.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" for="red">'.$RED.'</output></td></tr>
-                                <tr><td><label for="green" style="padding-right: 1rem">Green:</label></td><td><input type="range" sytle="width: 21%" id="green" name="green" min="0" max="255" step="1" value="'.$GREEN.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" for="green">'.$GREEN.'</output></td></tr>
-                                <tr><td><label for="blue" style="padding-right: 1rem">Blue:</label></td><td><input type="range" sytle="width: 21%" id="blue" name="blue" min="0" max="255" step="1" value="'.$BLUE.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" for="blue">'.$BLUE.'</output></td></tr>
-                                <tr><td><label for="white" style="padding-right: 1rem">White:</label></td><td><input type="range" sytle="width: 21%" id="white" name="white" min="0" max="255" step="1" value="'.$WHITE.'" oninput="this.nextElementSibling.value = this.value"><output style="padding-left: 1rem" for="white">'.$WHITE.'</output></td></tr>
-                            </table><br><br>
-                            <input class="btn btn-xl btn-outline-light" type="Submit" name="send" value="send">
-                        </form>';
+                                <form name="doit_rgbw" action="index.php?site=control" method="post" target="hidden-form">
+                                    <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'">
+                                    <input type="hidden" name="run" id="run" value="1">
+                                    <input type="hidden" name="type" id="type" value="rgbw">
+                                    <tr><td><label for="red" style="padding-right: 1rem">Red:</label></td><td><input type="range" sytle="width: 21%" id="red" name="red" min="0" max="254" step="1" value="'.$RED.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_rgbw\'].submit()"><output style="padding-left: 1rem" for="red">'.$RED.'</output></td></tr>
+                                    <tr><td><label for="green" style="padding-right: 1rem">Green:</label></td><td><input type="range" sytle="width: 21%" id="green" name="green" min="0" max="254" step="1" value="'.$GREEN.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_rgbw\'].submit()"><output style="padding-left: 1rem" for="green">'.$GREEN.'</output></td></tr>
+                                    <tr><td><label for="blue" style="padding-right: 1rem">Blue:</label></td><td><input type="range" sytle="width: 21%" id="blue" name="blue" min="0" max="254" step="1" value="'.$BLUE.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_rgbw\'].submit()"><output style="padding-left: 1rem" for="blue">'.$BLUE.'</output></td></tr>
+                                    <tr><td><label for="white" style="padding-right: 1rem">White:</label></td><td><input type="range" sytle="width: 21%" id="white" name="white" min="0" max="254" step="1" value="'.$WHITE.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_rgbw\'].submit()"><output style="padding-left: 1rem" for="white">'.$WHITE.'</output></td></tr>
+                                </form>
+                            </table><br><br>';
                     break;                    
             }
-
-
             echo'</div>   
                 </div>
             </section>';
         }
         ?>
+        <iframe style="display:none" name="hidden-form"></iframe>   
         <!-- Copyright Section-->
         <div class="copyright py-4 text-center text-white">
             <div class="container"><small>Copyright &copy; Licht Manufaktur Berlin GmbH 2022</small></div>
