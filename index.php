@@ -155,6 +155,7 @@
         <link href="css/fonts.css" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/style.css" rel="stylesheet" />
+        <link href="css/slider.css" rel="stylesheet" type="text/css" />
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -255,51 +256,102 @@
                 case 1://Level
                     echo'   <br><br>
                             <table style="margin: 0 auto; min-width: 3vw;">
-                                <form name="doit_level" action="index.php?site=control" method="post" target="hidden-form">
-                                    <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'">
-                                    <input type="hidden" name="run" id="run" value="1">   
-                                    <input type="hidden" name="type" id="type" value="level">                             
-                                    <tr><td><label for="level" style="padding-right: 1rem">Level:</label></td><td><input type="range" sytle="width: 21%" id="level" name="level" min="0" max="254" step="1" value="'.$LEVEL.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_level\'].submit()"><output style="padding-left: 1rem" id="sl_level" name="sl_level">'.$LEVEL.'</output></td></tr>
-                                </form>
+                                <tr><td>
+                                    <form name="doit_level" action="index.php?site=control" method="post" target="hidden-form">
+                                        <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'">
+                                        <input type="hidden" name="run" id="run" value="1">   
+                                        <input type="hidden" name="type" id="type" value="level">     
+                                        <div class="slider" id="slider1">
+                                            <label for="level" style="padding-right: 1rem">Level:</label><br>
+                                            <input type="range" name="level" id="level" min="0" max="254" value="'.$LEVEL.'"oninput="rangeValue1.innerText = this.value" onchange="document.forms[\'doit_level\'].submit()">
+                                            <p id="rangeValue1">'.$LEVEL.'</p>
+                                        </div>                        
+                                    </form>
+                                </td></tr>
                             </table><br><br>';
                     break;
                 case 2://TC
                     echo'   <br><br>
                             <table style="margin: 0 auto; min-width: 3vw;">
-                                <form name="doit_level" action="index.php?site=control" method="post" target="hidden-form">
-                                    <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'">
-                                    <input type="hidden" name="run" id="run" value="1">
-                                    <input type="hidden" name="type" id="type" value="level">
-                                    <tr><td><label for="level" style="padding-right: 1rem">Level:</label></td><td><input type="range" sytle="width: 21%" id="level" name="level" min="0" max="254" step="1" value="'.$LEVEL.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_level\'].submit()"><output style="padding-left: 1rem" id="sl_level" name="sl_level">'.$LEVEL.'</output></td></tr>
-                                </form>
+                                <tr><td>
+                                    <form name="doit_level" action="index.php?site=control" method="post" target="hidden-form">
+                                        <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'">
+                                        <input type="hidden" name="run" id="run" value="1">
+                                        <input type="hidden" name="type" id="type" value="level">
+                                        <div class="slider" id="slider1">
+                                            <label for="level" style="padding-right: 1rem">Level:</label><br>
+                                            <input type="range" name="level" id="level" min="0" max="254" value="'.$LEVEL.'"oninput="rangeValue1.innerText = this.value" onchange="document.forms[\'doit_level\'].submit()">
+                                            <p id="rangeValue1">'.$LEVEL.'</p>
+                                        </div>
+                                    </form>
+                                </td></tr>
                                 <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                <form name="doit_tc" action="index.php?site=control" method="post" target="hidden-form">
-                                    <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'">
-                                    <input type="hidden" name="run" id="run" value="1">
-                                    <input type="hidden" name="type" id="type" value="tc">
-                                    <tr><td><label for="tc" style="padding-right: 1rem">Tc:</label></td><td><input type="range" sytle="width: 21%" id="tc" name="tc" min="0" max="255" step="1" value="'.$TC.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_tc\'].submit()"><output style="padding-left: 1rem" for="tc">'.$TC.'</output></td></tr>
-                                </form>
+                                <tr><td>
+                                    <form name="doit_tc" action="index.php?site=control" method="post" target="hidden-form">
+                                        <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'">
+                                        <input type="hidden" name="run" id="run" value="1">
+                                        <input type="hidden" name="type" id="type" value="tc">
+                                        <div class="slider" id="slider2">
+                                            <label for="tc" style="padding-right: 1rem">Tc:</label><br>
+                                            <input type="range" name="tc" id="tc" min="0" max="254" value="'.$TC.'"oninput="rangeValue2.innerText = this.value" onchange="document.forms[\'doit_tc\'].submit()">
+                                            <p id="rangeValue2">'.$TC.'</p>
+                                        </div>
+                                    </form>
+                                </td></tr>
                             </table><br><br>';
                     break;
                 case 3://RGBW
                     echo'   <br><br>
                             <table style="margin: 0 auto; min-width: 3vw;">
-                                <form name="doit_level" action="index.php?site=control" method="post" target="hidden-form">
-                                    <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'">
-                                    <input type="hidden" name="run" id="run" value="1">
-                                    <input type="hidden" name="type" id="type" value="level">
-                                    <tr><td><label for="level" style="padding-right: 1rem">Level:</label></td><td><input type="range" sytle="width: 21%" id="level" name="level" min="0" max="254" step="1" value="'.$LEVEL.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_level\'].submit()"><output style="padding-left: 1rem" id="sl_level" name="sl_level">'.$LEVEL.'</output></td></tr>
-                                </form>
+                                <tr><td>
+                                    <form name="doit_level" action="index.php?site=control" method="post" target="hidden-form">
+                                        <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'">
+                                        <input type="hidden" name="run" id="run" value="1">   
+                                        <input type="hidden" name="type" id="type" value="level">     
+                                        <div class="slider" id="slider1">
+                                            <label for="level" style="padding-right: 1rem">Level:</label><br>
+                                            <input type="range" name="level" id="level" min="0" max="254" value="'.$LEVEL.'"oninput="rangeValue1.innerText = this.value" onchange="document.forms[\'doit_level\'].submit()">
+                                            <p id="rangeValue1">'.$LEVEL.'</p>
+                                        </div>                        
+                                    </form>
+                                </td></tr>
                                 <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-                                <form name="doit_rgbw" action="index.php?site=control" method="post" target="hidden-form">
-                                    <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'">
-                                    <input type="hidden" name="run" id="run" value="1">
-                                    <input type="hidden" name="type" id="type" value="rgbw">
-                                    <tr><td><label for="red" style="padding-right: 1rem">Red:</label></td><td><input type="range" sytle="width: 21%" id="red" name="red" min="0" max="254" step="1" value="'.$RED.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_rgbw\'].submit()"><output style="padding-left: 1rem" for="red">'.$RED.'</output></td></tr>
-                                    <tr><td><label for="green" style="padding-right: 1rem">Green:</label></td><td><input type="range" sytle="width: 21%" id="green" name="green" min="0" max="254" step="1" value="'.$GREEN.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_rgbw\'].submit()"><output style="padding-left: 1rem" for="green">'.$GREEN.'</output></td></tr>
-                                    <tr><td><label for="blue" style="padding-right: 1rem">Blue:</label></td><td><input type="range" sytle="width: 21%" id="blue" name="blue" min="0" max="254" step="1" value="'.$BLUE.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_rgbw\'].submit()"><output style="padding-left: 1rem" for="blue">'.$BLUE.'</output></td></tr>
-                                    <tr><td><label for="white" style="padding-right: 1rem">White:</label></td><td><input type="range" sytle="width: 21%" id="white" name="white" min="0" max="254" step="1" value="'.$WHITE.'" oninput="this.nextElementSibling.value = this.value" onchange="document.forms[\'doit_rgbw\'].submit()"><output style="padding-left: 1rem" for="white">'.$WHITE.'</output></td></tr>
-                                </form>
+                                <tr><td>
+                                    <form name="doit_rgbw" action="index.php?site=control" method="post" target="hidden-form">
+                                        <input type="hidden" name="scan_code" id="scan_code" value="'.$CODE.'">
+                                        <input type="hidden" name="run" id="run" value="1">
+                                        <input type="hidden" name="type" id="type" value="rgbw">
+                                        <div class="slider" id="slider2">
+                                            <label for="red" style="padding-right: 1rem">Red:</label><br>
+                                            <input type="range" name="red" id="red" min="0" max="254" value="'.$RED.'"oninput="rangeValue2.innerText = this.value" onchange="document.forms[\'doit_rgbw\'].submit()">
+                                            <p id="rangeValue2">'.$RED.'</p>
+                                        </div>   
+                                </td></tr>
+                                <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                <tr><td>
+                                        <div class="slider" id="slider3">
+                                            <label for="green" style="padding-right: 1rem">Green:</label><br>
+                                            <input type="range" name="green" id="green" min="0" max="254" value="'.$GREEN.'"oninput="rangeValue3.innerText = this.value" onchange="document.forms[\'doit_rgbw\'].submit()">
+                                            <p id="rangeValue3">'.$GREEN.'</p>
+                                        </div>   
+                                        </td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                        <tr><td>                                        
+                                        <div class="slider" id="slider4">
+                                            <label for="blue" style="padding-right: 1rem">Blue:</label><br>
+                                            <input type="range" name="blue" id="blue" min="0" max="254" value="'.$BLUE.'"oninput="rangeValue4.innerText = this.value" onchange="document.forms[\'doit_rgbw\'].submit()">
+                                            <p id="rangeValue4">'.$BLUE.'</p>
+                                        </div>  
+                                        </td></tr>
+                                        <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                        <tr><td>                                         
+                                        <div class="slider" id="slider5">
+                                            <label for="white" style="padding-right: 1rem">White:</label><br>
+                                            <input type="range" name="white" id="white" min="0" max="254" value="'.$WHITE.'"oninput="rangeValue5.innerText = this.value" onchange="document.forms[\'doit_rgbw\'].submit()">
+                                            <p id="rangeValue5">'.$WHITE.'</p>
+                                        </div>                                                                                                                       
+                                    </form>
+                                </td></tr>
                             </table><br><br>';
                     break;                    
             }
