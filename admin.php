@@ -82,6 +82,7 @@
             die("ERROR: Could not connect. " . mysqli_connect_error());
         }
 
+        $foundnewstring = 0;    
         while ($foundnewstring == 0) {
             $new_code = cleanCode(substr(md5(time()), 0, 10));
 
@@ -107,7 +108,20 @@
         }
 
         if (isset($_POST['code_type'])){
-            $code_type_save = cleanNumber($_POST['code_type']);
+            $code_type_save_temp = cleanText($_POST['code_type']);
+            if ($code_type_save_temp == "level"){
+                $code_type_save = 1;
+            }
+            if ($code_type_save_temp == "tc"){
+                $code_type_save = 2;
+            }
+            if ($code_type_save_temp == "rgbw"){
+                $code_type_save = 3;
+            }
+            if ($code_type_save_temp == "none"){
+                $code_type_save = 0;
+            }
+            echo $_POST['code_type'].' - '.$code_type_save_temp.' - '.$code_type_save;
         }else{
             $code_type_save = 0;
         }
@@ -119,7 +133,22 @@
         }
 
         if (isset($_POST['target_type'])){
-            $target_type_save = cleanNumber($_POST['target_type']);
+            $target_type_save_temp = cleanText($_POST['target_type']);
+            if ($target_type_save_temp == "broadcast"){
+                $target_type_save = 0;
+            }
+            if ($target_type_save_temp == "device"){
+                $target_type_save = 1;
+            }
+            if ($target_type_save_temp == "group"){
+                $target_type_save = 2;
+            }
+            if ($target_type_save_temp == "scene"){
+                $target_type_save = 4;
+            }
+            if ($target_type_save_temp == "none"){
+                $target_type_save = 255;
+            }
         }else{
             $target_type_save = 0;
         }
@@ -282,11 +311,44 @@
                     }else{
                         echo'<tr style="border-top: thin solid #ffffff;">';
                     }
-                    echo'<td>'.$code.'</td>
-                        <td>'.$code_type.'</td>
-                        <td>'.$lithernet_id.'</td>
-                        <td>'.$target_type.'</td>
-                        <td>'.$target_id.'</td> 
+                    echo'<td>'.$code.'</td>';
+
+                    switch($code_type){
+                        case 1:
+                            echo '<td>Level</td>';
+                            break;
+                        case 2:
+                            echo '<td>Tc</td>';
+                            break;
+                        case 3:
+                            echo '<td>RGBW</td>';
+                            break;
+                        default:
+                            echo '<td>None</td>';
+                            break;
+                    }
+
+                    echo'<td>'.$lithernet_id.'</td>';
+
+                    switch($target_type){
+                        case 0:
+                            echo '<td>Broadcast</td>';
+                            break;                        
+                        case 1:
+                            echo '<td>Device</td>';
+                            break;
+                        case 2:
+                            echo '<td>Group</td>';
+                            break;
+                        case 4:
+                            echo '<td>Scene</td>';
+                            break;
+                        default:
+                            echo '<td>None</td>';
+                            break;
+                    }
+
+                    echo'<td>'.$target_id.'</td> 
                         <td><a class="nav-link py-3 px-0 px-lg-3 rounded text-white" href="admin.php?site=edit&code='.$code.'"><i class="fas fa-pen"></i></a></td>                           
                         <td><a class="nav-link py-3 px-0 px-lg-3 rounded text-white" href="admin.php?site=print&code='.$code.'"><i class="fas fa-print"></i></a></td>
                         <td><a class="nav-link py-3 px-0 px-lg-3 rounded text-white" href="admin.php?site=delete&code='.$code.'"><i class="fas fa-trash-can"></i></a></td>   
@@ -353,11 +415,44 @@
                         <form action="admin.php?site=save" method="post">
                             <input type="hidden" name="mode" id="mode" value="'.$mode.'"><br><br>
                             <table style="margin: 0 auto; min-width: 3vw;">
-                            <tr><td><label for="code" style="padding-right: 1rem">Code:</label></td><td><input class="btn btn-xl btn-outline-light" type="text" name="code" id="code" readonly="readonly" value="'.$code.'" maxlength="10"></td></tr>
-                            <tr><td><label for="code_type" style="padding-right: 1rem">Code Type:</label></td><td><input class="btn btn-xl btn-outline-light" type="text" name="code_type" id="code_type" value="'.$code_type.'" maxlength="10"></td></tr>
-                            <tr><td><label for="lithernet_id" style="padding-right: 1rem">Lithernet ID:</label></td><td><input class="btn btn-xl btn-outline-light" type="text" name="lithernet_id" id="lithernet_id" value="'.$lithernet_id.'" maxlength="10"></td></tr>
-                            <tr><td><label for="target_type" style="padding-right: 1rem">Target Type:</label></td><td><input class="btn btn-xl btn-outline-light" type="text" name="target_type" id="target_type" value="'.$target_type.'" maxlength="10"></td></tr>
-                            <tr><td><label for="target_id" style="padding-right: 1rem">Target ID:</label></td><td><input class="btn btn-xl btn-outline-light" type="text" name="target_id" id="target_id" value="'.$target_id.'" maxlength="10"></td></tr>
+                            <tr><td><label for="code" style="padding-right: 1rem">Code:</label></td><td><input class="btn btn-xl btn-outline-light" type="text" name="code" id="code" readonly="readonly" value="'.$code.'" maxlength="10"></td></tr>';
+
+                            switch($code_type){
+                                case 1:
+                                    echo '<tr><td><label for="code_type" style="padding-right: 1rem">Type:</label></td><td><select name="code_type" id="code_type" class="btn btn-xl btn-outline-light" style="width: 100%;"><option selected>Level</option><option>Tc</option><option>RGBW</option><option>None</option></select></td></tr>';
+                                    break;
+                                case 2:
+                                    echo '<tr><td><label for="code_type" style="padding-right: 1rem">Type:</label></td><td><select name="code_type" id="code_type" class="btn btn-xl btn-outline-light" style="width: 100%;"><option>Level</option><option selected>Tc</option><option>RGBW</option><option>None</option></select></td></tr>';
+                                    break;
+                                case 3:   
+                                    echo '<tr><td><label for="code_type" style="padding-right: 1rem">Type:</label></td><td><select name="code_type" id="code_type" class="btn btn-xl btn-outline-light" style="width: 100%;"><option>Level</option><option>Tc</option><option selected>RGBW</option><option>None</option></select></td></tr>';
+                                    break;
+                                default:
+                                    echo '<tr><td><label for="code_type" style="padding-right: 1rem">Type:</label></td><td><select name="code_type" id="code_type" class="btn btn-xl btn-outline-light" style="width: 100%;"><option>Level</option><option>Tc</option><option>RGBW</option><option selected>None</option></select></td></tr>';
+                                    break;
+                            }
+
+            echo '          <tr><td><label for="lithernet_id" style="padding-right: 1rem">Lithernet ID:</label></td><td><input class="btn btn-xl btn-outline-light" type="text" name="lithernet_id" id="lithernet_id" value="'.$lithernet_id.'" maxlength="10"></td></tr>';
+
+                            switch($target_type){
+                                case 0:
+                                    echo '<tr><td><label for="target_type" style="padding-right: 1rem">Target Type:</label></td><td><select name="target_type" id="target_type" class="btn btn-xl btn-outline-light" style="width: 100%;"><option selected>Broadcast</option><option>Device</option><option>Group</option><option>Scene</option><option>None</option></select></td></tr>';
+                                    break;                                
+                                case 1:
+                                    echo '<tr><td><label for="target_type" style="padding-right: 1rem">Target Type:</label></td><td><select name="target_type" id="target_type" class="btn btn-xl btn-outline-light" style="width: 100%;"><option>Broadcast</option><option selected>Device</option><option>Group</option><option>Scene</option><option>None</option></select></td></tr>';
+                                    break;
+                                case 2:
+                                    echo '<tr><td><label for="target_type" style="padding-right: 1rem">Target Type:</label></td><td><select name="target_type" id="target_type" class="btn btn-xl btn-outline-light" style="width: 100%;"><option>Broadcast</option><option>Device</option><option selected>Group</option><option>Scene</option><option>None</option></select></td></tr>';
+                                    break;
+                                case 4:   
+                                    echo '<tr><td><label for="target_type" style="padding-right: 1rem">Target Type:</label></td><td><select name="target_type" id="target_type" class="btn btn-xl btn-outline-light" style="width: 100%;"><option>Broadcast</option><option>Device</option><option>Group</option><option selected>Scene</option><option>None</option></select></td></tr>';
+                                    break;
+                                default:
+                                    echo '<tr><td><label for="target_type" style="padding-right: 1rem">Target Type:</label></td><td><select name="target_type" id="target_type" class="btn btn-xl btn-outline-light" style="width: 100%;"><option>Broadcast</option><option>Device</option><option>Group</option><option>Scene</option><option selected>None</option></select></td></tr>';
+                                    break;
+                            }
+
+            echo '          <tr><td><label for="target_id" style="padding-right: 1rem">Target ID:</label></td><td><input class="btn btn-xl btn-outline-light" type="text" name="target_id" id="target_id" value="'.$target_id.'" maxlength="10"></td></tr>
                             </table><br><br>
                             <input class="btn btn-xl btn-outline-light" type="Submit" name="save" value="save">
                         </form>
@@ -377,7 +472,7 @@
 
             include('functions/phpqrcode.php');
             $file = "temp/".$code_print.".png";
-            QRcode::png($code_print, $file, QR_ECLEVEL_H);
+            QRcode::png($code_print, $file, QR_ECLEVEL_H, 4);
             echo '<section class="startscreen bg-primary text-white mb-0" id="code">
                 <div class="container">
                     <!-- code Section Heading-->

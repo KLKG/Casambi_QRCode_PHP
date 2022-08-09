@@ -26,4 +26,11 @@
         $clean = substr($clean, 0, 10);
         return $clean;
     }
+
+    function cleanText($input){
+        $clean = strtolower($input);
+        $clean = preg_replace('/[^a-zA-Z0-9]+/', '', $clean); 
+        $clean = substr($clean, 0, 10);
+        return $clean;
+    }
 ?>
