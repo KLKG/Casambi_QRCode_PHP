@@ -58,6 +58,12 @@
             $TC = 0;
         }
 
+        if (isset( $_POST['scene'])){
+            $SCENE = cleanNumber($_POST['scene']);
+        }else{
+            $SCENE = 0;
+        }
+
         $db_link = mysqli_connect($db_host, $db_user, $db_password, $db_database);
 
         if($db_link === false){
@@ -91,7 +97,7 @@
             }
             if ($operation_mode != "demo"){
                 socket_set_option($sock, SOL_SOCKET, SO_BROADCAST, 1); 
-                $message = buildcasambiString($code_type, $lithernet_id, $target_type, $target_id, $LEVEL, $RED, $GREEN, $BLUE, $WHITE, $TC);
+                $message = buildcasambiString($code_type, $lithernet_id, $target_type, $target_id, $LEVEL, $RED, $GREEN, $BLUE, $WHITE, $TC, $SCENE);
                 socket_sendto($sock, $message, 100 , 0 , $lithernet_base_ip , $lithernet_base_port);
                 socket_close($sock);
             }
