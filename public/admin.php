@@ -231,6 +231,7 @@ function saveCodeForm(string $code, array $post): array
             'param_min'   => (int) $element['param_min'],
             'param_max'   => (int) $element['param_max'],
             'param_level' => (int) $element['param_level'],
+            'param_index' => (int) ($element['param_index'] ?? 0),
         ];
 
         if (!empty($def['target'])) {
@@ -241,12 +242,20 @@ function saveCodeForm(string $code, array $post): array
                 $fields['target_type'] = $tt;
             }
         }
-        if (!empty($def['target']) || !empty($def['scene'])) {
+        if (!empty($def['target']) || !empty($def['id_label'])) {
             $tid = cleanInt($row['target_id'] ?? null, 0, 255, -1);
             if ($tid < 0) {
-                $errors[] = t('"{name}": target / scene id must be between 0 and 255.', ['name' => $label]);
+                $errors[] = t('"{name}": target / scene / group / button id must be between 0 and 255.', ['name' => $label]);
             } else {
                 $fields['target_id'] = $tid;
+            }
+        }
+        if (!empty($def['index'])) {
+            $idx = cleanInt($row['param_index'] ?? null, 0, 255, -1);
+            if ($idx < 0) {
+                $errors[] = t('"{name}": element index must be between 0 and 255.', ['name' => $label]);
+            } else {
+                $fields['param_index'] = $idx;
             }
         }
         if (!empty($def['fade'])) {

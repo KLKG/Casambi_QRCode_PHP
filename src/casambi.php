@@ -18,13 +18,20 @@ const TARGET_SCENE_ALL    = 4;
 const TARGET_VENDOR_ID    = 5;
 const TARGET_MULTICAST    = 8;
 
-const OPCODE_SET_SCENE_LEVEL   = 30;
-const OPCODE_SET_LEVEL         = 32;
-const OPCODE_SET_RGBW          = 47;
-const OPCODE_SET_VERTICAL      = 49;
-const OPCODE_SET_HUE_SAT       = 61;
-const OPCODE_SET_COLOR_TEMP    = 72;
-const OPCODE_RESUME_AUTOMATION = 74;
+const OPCODE_PUSHBUTTON_PRESSED  = 16;
+const OPCODE_PUSHBUTTON_RELEASED = 17;
+const OPCODE_SET_SCENE_LEVEL     = 30;
+const OPCODE_SET_GROUP_LEVEL     = 31;
+const OPCODE_SET_LEVEL           = 32;
+const OPCODE_SET_PUSHBUTTON_LEVEL = 33;
+const OPCODE_SET_RGBW            = 47;
+const OPCODE_SET_VERTICAL        = 49;
+const OPCODE_SET_COLOR_XY        = 56;
+const OPCODE_SET_HUE_SAT         = 61;
+const OPCODE_SET_DIMMERS         = 62;
+const OPCODE_SET_ELEMENTS        = 63;
+const OPCODE_SET_COLOR_TEMP      = 72;
+const OPCODE_RESUME_AUTOMATION   = 74;
 
 /** @return array<int, string> */
 function targetTypes(): array
@@ -120,6 +127,7 @@ function elementTypes(): array
             'kind'   => 'slider',
             'fields' => ['level' => [t('Level'), 0, 254]],
             'target' => false, 'fade' => true, 'scene' => true, 'range' => false, 'level' => false,
+            'id_label' => t('Scene number'),
         ],
         'scene_button' => [
             'label'   => t('Scene button'),
@@ -127,6 +135,15 @@ function elementTypes(): array
             'kind'    => 'buttons',
             'buttons' => [[t('Activate'), 'level', 'param_level']],
             'target' => false, 'fade' => true, 'scene' => true, 'range' => false, 'level' => true,
+            'id_label' => t('Scene number'),
+        ],
+        'group_level' => [
+            'label'  => t('Group level slider'),
+            'help'   => t('Level 0-254 of a Casambi group; group number = target id (SetGroupLevel).'),
+            'kind'   => 'slider',
+            'fields' => ['level' => [t('Level'), 0, 254]],
+            'target' => false, 'fade' => true, 'scene' => false, 'range' => false, 'level' => false,
+            'id_label' => t('Group number'),
         ],
         'resume' => [
             'label'   => t('Resume automation button'),
@@ -134,6 +151,46 @@ function elementTypes(): array
             'kind'    => 'buttons',
             'buttons' => [[t('Automatic'), null, null]],
             'target' => true, 'fade' => false, 'scene' => false, 'range' => false, 'level' => false,
+        ],
+        'dimmer' => [
+            'label'  => t('Dimmer slider'),
+            'help'   => t('Level 0-254 of one dimmer of the target, selected by the element index (SetTargetDimmers).'),
+            'kind'   => 'slider',
+            'fields' => ['dimmer' => [t('Level'), 0, 254]],
+            'target' => true, 'fade' => true, 'scene' => false, 'range' => false, 'level' => false,
+            'index'  => true,
+        ],
+        'element' => [
+            'label'  => t('Element slider'),
+            'help'   => t('Value 0-254 of one element of the target (e.g. a colour channel or custom element), selected by the element index (SetTargetElements).'),
+            'kind'   => 'slider',
+            'fields' => ['value' => [t('Value'), 0, 254]],
+            'target' => true, 'fade' => true, 'scene' => false, 'range' => false, 'level' => false,
+            'index'  => true,
+        ],
+        'xy' => [
+            'label'  => t('Colour XY sliders'),
+            'help'   => t('CIE 1931 colour point; x and y as 16-bit values 0-65535 (SetTargetColorXY).'),
+            'kind'   => 'slider',
+            'fields' => ['x' => [t('x'), 0, 65535], 'y' => [t('y'), 0, 65535]],
+            'target' => true, 'fade' => false, 'scene' => false, 'range' => false, 'level' => false,
+        ],
+        'pushbutton' => [
+            'label'   => t('Push button'),
+            'help'    => t('Behaves like a Casambi push button: "pressed" is sent while the button is held, "released" when it is let go; button id = target id (PushButtonPressed / PushButtonReleased).'),
+            'kind'    => 'buttons',
+            'buttons' => [[t('Push'), null, null], [t('Release'), null, null]],
+            'hold'    => true,
+            'target' => false, 'fade' => false, 'scene' => false, 'range' => false, 'level' => false,
+            'id_label' => t('Button id'),
+        ],
+        'pushbutton_level' => [
+            'label'  => t('Push button level slider'),
+            'help'   => t('Sets the level 0-254 stored for a Casambi push button; button id = target id (SetPushButtonLevel).'),
+            'kind'   => 'slider',
+            'fields' => ['level' => [t('Level'), 0, 254]],
+            'target' => false, 'fade' => false, 'scene' => false, 'range' => false, 'level' => false,
+            'id_label' => t('Button id'),
         ],
     ];
 }
@@ -240,17 +297,45 @@ function elementState(array $element): array
  * Build the gateway command for an element and its (new) state.
  *
  * @param array<string, int> $state
+ * @param int|null $action index of the pressed button for button elements (null for sliders)
  */
-function buildElementCommand(array $element, array $state, int $lithernetId): string
+function buildElementCommand(array $element, array $state, int $lithernetId, ?int $action = null): string
 {
     $tt    = (int) $element['target_type'];
     $tid   = (int) $element['target_id'];
+    $idx   = max(0, min(255, (int) ($element['param_index'] ?? 0)));
     $fade  = max(0, min(65535, (int) $element['fade_ms']));
     $fLow  = $fade & 0xFF;
     $fHigh = $fade >> 8;
     $gw    = $lithernetId;
 
     switch ((string) $element['element_type']) {
+        case 'group_level':
+            $level = $state['level'] ?? 0;
+            return "{$gw}#114#5#" . OPCODE_SET_GROUP_LEVEL . "#{$tid}#{$level}#{$fLow}#{$fHigh}\r\n";
+
+        case 'dimmer':
+            $v = $state['dimmer'] ?? 0;
+            return "{$gw}#114#7#" . OPCODE_SET_DIMMERS . "#{$tt}#{$tid}#{$fLow}#{$fHigh}#{$idx}#{$v}\r\n";
+
+        case 'element':
+            $v = $state['value'] ?? 0;
+            return "{$gw}#114#7#" . OPCODE_SET_ELEMENTS . "#{$tt}#{$tid}#{$fLow}#{$fHigh}#{$idx}#{$v}\r\n";
+
+        case 'xy':
+            $x = $state['x'] ?? 0;
+            $y = $state['y'] ?? 0;
+            return "{$gw}#114#7#" . OPCODE_SET_COLOR_XY . '#' . ($x & 0xFF) . '#' . ($x >> 8)
+                . '#' . ($y & 0xFF) . '#' . ($y >> 8) . "#{$tt}#{$tid}\r\n";
+
+        case 'pushbutton':
+            $op = $action === 1 ? OPCODE_PUSHBUTTON_RELEASED : OPCODE_PUSHBUTTON_PRESSED;
+            return "{$gw}#114#2#{$op}#{$tid}\r\n";
+
+        case 'pushbutton_level':
+            $level = $state['level'] ?? 0;
+            return "{$gw}#114#3#" . OPCODE_SET_PUSHBUTTON_LEVEL . "#{$tid}#{$level}\r\n";
+
         case 'level':
         case 'switch':
             $level = $state['level'] ?? 0;

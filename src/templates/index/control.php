@@ -63,9 +63,14 @@ $title = $entry !== null && $entry['name'] !== '' ? (string) $entry['name'] : $c
                     <?php endforeach; ?>
                 <?php else: ?>
                     <div class="app-buttons">
+                    <?php if (!empty($def['hold'])): $b = elementButtons($element)[0]; ?>
+                        <button type="button" class="btn btn-xl btn-outline-light app-action app-hold" data-press="0" data-release="1"><?= e($b['label']) ?></button>
+                        <span class="app-hint"><?= e(t('hold to keep the button pressed')) ?></span>
+                    <?php else: ?>
                     <?php foreach (elementButtons($element) as $index => $b): ?>
                         <button type="button" class="btn btn-xl btn-outline-light app-action" data-action="<?= $index ?>"><?= e($b['label']) ?></button>
                     <?php endforeach; ?>
+                    <?php endif; ?>
                     </div>
                 <?php endif; ?>
             </form>

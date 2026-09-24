@@ -109,6 +109,36 @@
             });
         });
 
+        // Push button elements: "pressed" while held (pointer or keyboard), "released" on let go.
+        form.querySelectorAll('button[data-press]').forEach(function (button) {
+            var held = false;
+            function press(event) {
+                if (held) { return; }
+                held = true;
+                button.classList.add('is-active');
+                sendControl(form, button.dataset.press);
+                if (event && event.preventDefault) { event.preventDefault(); }
+            }
+            function release() {
+                if (!held) { return; }
+                held = false;
+                button.classList.remove('is-active');
+                sendControl(form, button.dataset.release);
+            }
+            button.addEventListener('pointerdown', press);
+            button.addEventListener('pointerup', release);
+            button.addEventListener('pointercancel', release);
+            button.addEventListener('pointerleave', release);
+            button.addEventListener('keydown', function (event) {
+                if (event.key === ' ' || event.key === 'Enter') { press(event); }
+            });
+            button.addEventListener('keyup', function (event) {
+                if (event.key === ' ' || event.key === 'Enter') { release(); }
+            });
+            button.addEventListener('blur', release);
+            button.addEventListener('contextmenu', function (event) { event.preventDefault(); });
+        });
+
         form.addEventListener('submit', function (event) {
             event.preventDefault();
             if (form.querySelector('input[type="range"]')) {

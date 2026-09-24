@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-const SCHEMA_VERSION = 4;
+const SCHEMA_VERSION = 5;
 
 /** SQL files that bring the schema from version N to N+1. Version 0 = empty database. */
 function schemaMigrationFiles(): array
@@ -20,6 +20,7 @@ function schemaMigrationFiles(): array
         1 => 'migrate-v1-to-v2.sql',   // applied when the detected version is 1 (result: 2)
         2 => 'migrate-v2-to-v3.sql',   // applied when the detected version is 2 (result: 3)
         3 => 'migrate-v3-to-v4.sql',   // applied when the detected version is 3 (result: 4)
+        4 => 'migrate-v4-to-v5.sql',   // applied when the detected version is 4 (result: 5)
     ];
 }
 

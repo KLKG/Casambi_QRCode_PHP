@@ -44,6 +44,7 @@ if ($def === null) {
     jsonExit(500, ['ok' => false, 'error' => t('Element type not supported.')]);
 }
 
+$index = null;
 if ($def['kind'] === 'slider') {
     foreach (elementFields($element) as $field => $f) {
         $state[$field] = cleanInt($_POST[$field] ?? null, $f['min'], $f['max'], $state[$field]);
@@ -64,7 +65,7 @@ try {
     if ($state !== []) {
         qrUpdateElementState((int) $element['id'], $state);
     }
-    $message = buildElementCommand($element, $state, (int) $entry['lithernet_id']);
+    $message = buildElementCommand($element, $state, (int) $entry['lithernet_id'], $index);
     $sent    = sendCasambiCommand($message);
 } catch (Throwable $e) {
     error_log((string) $e);

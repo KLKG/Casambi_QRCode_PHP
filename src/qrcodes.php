@@ -109,18 +109,19 @@ function qrAddElement(string $code, string $type, string $name): int
         'param_min'    => 2700,
         'param_max'    => 6500,
         'param_level'  => 254,
+        'param_index'  => 0,
         'state'        => null,
     ];
     $state = json_encode(elementDefaultState($template), JSON_THROW_ON_ERROR);
 
     dbExecute(
         'INSERT INTO qrcode_elements
-            (code, position, name, element_type, target_type, target_id, fade_ms, param_min, param_max, param_level, state)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            (code, position, name, element_type, target_type, target_id, fade_ms, param_min, param_max, param_level, param_index, state)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
             $code, $position, $name !== '' ? $name : $def['label'], $type,
             $template['target_type'], $template['target_id'], $template['fade_ms'],
-            $template['param_min'], $template['param_max'], $template['param_level'], $state,
+            $template['param_min'], $template['param_max'], $template['param_level'], $template['param_index'], $state,
         ]
     );
     return (int) db()->insert_id;
@@ -130,18 +131,18 @@ function qrAddElement(string $code, string $type, string $name): int
  * Update the editable settings of an element.
  *
  * @param array{position: int, name: string, target_type: int, target_id: int, fade_ms: int,
- *              param_min: int, param_max: int, param_level: int} $f
+ *              param_min: int, param_max: int, param_level: int, param_index: int} $f
  */
 function qrUpdateElement(int $id, string $code, array $f): void
 {
     dbExecute(
         'UPDATE qrcode_elements
             SET position = ?, name = ?, target_type = ?, target_id = ?, fade_ms = ?,
-                param_min = ?, param_max = ?, param_level = ?
+                param_min = ?, param_max = ?, param_level = ?, param_index = ?
           WHERE id = ? AND code = ?',
         [
             $f['position'], $f['name'], $f['target_type'], $f['target_id'], $f['fade_ms'],
-            $f['param_min'], $f['param_max'], $f['param_level'], $id, $code,
+            $f['param_min'], $f['param_max'], $f['param_level'], (int) ($f['param_index'] ?? 0), $id, $code,
         ]
     );
 }

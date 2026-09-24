@@ -1,4 +1,4 @@
--- Casambi QR-Code - database schema (v4)
+-- Casambi QR-Code - database schema (v5)
 --
 -- The application installs this schema automatically on the first request when the
 -- database is empty (src/migrations.php) and upgrades older databases with the
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `schema_migrations` (
     `applied_at` TIMESTAMP         NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-INSERT IGNORE INTO `schema_migrations` (`version`) VALUES (4);
+INSERT IGNORE INTO `schema_migrations` (`version`) VALUES (5);
 
 -- Settings edited in the admin area; they override the values in config/config.php.
 CREATE TABLE IF NOT EXISTS `settings` (
@@ -61,7 +61,8 @@ CREATE TABLE IF NOT EXISTS `qrcodes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Control elements of a code (sliders / buttons), shown in `position` order.
--- element_type: level, switch, tc, rgbw, huesat, vertical, scene, scene_button, resume
+-- element_type: level, switch, tc, rgbw, huesat, vertical, scene, scene_button, group_level, resume,
+--               dimmer, element, xy, pushbutton, pushbutton_level
 CREATE TABLE IF NOT EXISTS `qrcode_elements` (
     `id`           INT UNSIGNED      NOT NULL AUTO_INCREMENT,
     `code`         VARCHAR(10)       NOT NULL,
@@ -74,6 +75,7 @@ CREATE TABLE IF NOT EXISTS `qrcode_elements` (
     `param_min`    SMALLINT UNSIGNED NOT NULL DEFAULT 2700, -- tc: lowest Kelvin of the slider
     `param_max`    SMALLINT UNSIGNED NOT NULL DEFAULT 6500, -- tc: highest Kelvin of the slider
     `param_level`  TINYINT UNSIGNED  NOT NULL DEFAULT 254,  -- scene_button: level sent when pressed
+    `param_index`  SMALLINT UNSIGNED NOT NULL DEFAULT 0,    -- dimmer / element: element index inside the luminaire
     `state`        TEXT              NULL,                  -- JSON with the last values (level, tc, red, ...)
     PRIMARY KEY (`id`),
     KEY `idx_qrcode_elements_code` (`code`, `position`),

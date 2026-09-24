@@ -110,11 +110,19 @@ $code = (string) $entry['code'];
                         </div>
                         <?php endif; ?>
 
-                        <?php if ($def['scene']): ?>
+                        <?php if (!empty($def['id_label'])): ?>
                         <div class="app-field-sm">
-                            <label for="el<?= $id ?>-target_id"><?= e(t('Scene number')) ?></label>
+                            <label for="el<?= $id ?>-target_id"><?= e($def['id_label']) ?></label>
                             <input class="app-input" type="number" name="<?= $n ?>[target_id]" id="el<?= $id ?>-target_id"
-                                   min="1" max="255" value="<?= (int) $element['target_id'] ?>">
+                                   min="0" max="255" value="<?= (int) $element['target_id'] ?>">
+                        </div>
+                        <?php endif; ?>
+
+                        <?php if (!empty($def['index'])): ?>
+                        <div class="app-field-sm">
+                            <label for="el<?= $id ?>-index"><?= e(t('Element index')) ?></label>
+                            <input class="app-input" type="number" name="<?= $n ?>[param_index]" id="el<?= $id ?>-index"
+                                   min="0" max="255" value="<?= (int) $element['param_index'] ?>">
                         </div>
                         <?php endif; ?>
 
