@@ -22,6 +22,17 @@
         return text;
     }
 
+    /* ---- 0. Fixed navigation: keep the content below it ------------- */
+    var nav = document.getElementById('mainNav');
+    function updateNavHeight() {
+        if (nav) {
+            document.documentElement.style.setProperty('--nav-height', nav.offsetHeight + 'px');
+        }
+    }
+    updateNavHeight();
+    window.addEventListener('resize', updateNavHeight);
+    window.addEventListener('load', updateNavHeight);
+
     /* ---- 1. Delete confirmation ------------------------------------- */
     document.querySelectorAll('form[data-confirm], button[data-confirm]').forEach(function (el) {
         var eventName = el.tagName === 'FORM' ? 'submit' : 'click';

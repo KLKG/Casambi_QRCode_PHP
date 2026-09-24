@@ -9,8 +9,8 @@
     <div class="container"><small><?= e(t('Copyright')) ?> &copy; Licht Manufaktur Berlin GmbH 2022&ndash;<?= date('Y') ?></small></div>
 </footer>
 <?php if (in_array('scanner', $scripts, true)): ?>
-<script src="assets/js/vendor/barcode-detector/barcode-detector.ponyfill.js"></script>
+<script src="<?= e(asset('assets/js/vendor/barcode-detector/barcode-detector.ponyfill.js')) ?>"></script>
 <?php endif; ?>
-<script src="assets/js/app.js"></script>
+<script src="<?= e(asset('assets/js/app.js')) ?>"></script>
 </body>
 </html>

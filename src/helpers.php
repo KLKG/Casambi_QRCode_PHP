@@ -226,6 +226,17 @@ function sendSecurityHeaders(): void
 // ---------------------------------------------------------------------------
 
 /**
+ * Asset URL with a version parameter derived from the file's modification time,
+ * so browsers pick up changed CSS/JS despite long cache lifetimes.
+ */
+function asset(string $path): string
+{
+    $file  = APP_ROOT . '/public/' . ltrim($path, '/');
+    $mtime = is_file($file) ? (int) filemtime($file) : 0;
+    return $path . ($mtime > 0 ? '?v=' . $mtime : '');
+}
+
+/**
  * Render a template from src/templates inside the shared layout.
  *
  * Available in every template: $config, $title, $area ('index'|'admin'), $scripts, $flash

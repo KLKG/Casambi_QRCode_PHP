@@ -66,6 +66,8 @@ The web cam only works over **HTTPS** (browser requirement for camera access).
    - writes `config/config.php` and continues to the admin area, where the tables are created
      and the first admin account is set up.
 
+   <img src="docs/images/8_setup_wizard.png" alt="Setup wizard: requirements, database and gateway" style="width: 60%">
+
    `config/config.php` is ignored by git; all further options are documented in
    `config/config.example.php`. To protect the wizard on a publicly reachable server, put a
    secret into `config/setup.key` before opening the page; the wizard then asks for it.
@@ -79,7 +81,7 @@ The web cam only works over **HTTPS** (browser requirement for camera access).
    For photo uploads `upload_max_filesize` and `post_max_size` in `php.ini` must be at least
    the configured `image_max_upload_bytes` (default 8 MB).
 
-5. **Admin account**: created by the wizard. To add or reset one later:
+5. **Admin account**: after the wizard the admin area shows a form "Create the admin account" (this is not a login): choose the username and password of the first administrator, then log in with them. To add or reset one later:
 
    ```
    php bin/create-admin.php <username>

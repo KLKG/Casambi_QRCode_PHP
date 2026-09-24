@@ -22,9 +22,9 @@ $tab       = static fn (string $name): string => $name === $activeTab ? ' is-act
     <meta name="description" content="<?= e(t('Control Casambi lighting via QR codes and the Lithernet Casambi Gateway.')) ?>">
     <title><?= e($title === $appName ? $title : $title . ' – ' . $appName) ?></title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-    <link href="assets/css/fonts.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/app.css" rel="stylesheet">
+    <link href="<?= e(asset('assets/css/fonts.css')) ?>" rel="stylesheet">
+    <link href="<?= e(asset('assets/css/style.css')) ?>" rel="stylesheet">
+    <link href="<?= e(asset('assets/css/app.css')) ?>" rel="stylesheet">
 </head>
 <body id="page-top"
       data-t-sending="<?= e(t('Sending…')) ?>"

@@ -18,23 +18,21 @@
             <button class="btn btn-xl btn-outline-light" type="submit"><?= icon('plus-lg') ?> <?= e(t('Add Code')) ?></button>
         </form>
 
-        <div class="table-responsive mt-4">
-            <table class="app-table">
+        <div class="app-table-wrap mt-4">
+            <table class="app-table app-table-stack">
                 <thead>
                     <tr>
-                        <th scope="col"><?= e(t('Name')) ?></th>
+                        <th scope="col" class="app-cell-left"><?= e(t('Name')) ?></th>
                         <th scope="col"><?= e(t('Code')) ?></th>
-                        <th scope="col"><?= e(t('Lithernet ID')) ?></th>
-                        <th scope="col"><?= e(t('Elements')) ?></th>
-                        <th scope="col"><?= e(t('Photo')) ?></th>
-                        <th scope="col"><?= e(t('Edit')) ?></th>
-                        <th scope="col"><?= e(t('Print')) ?></th>
-                        <th scope="col"><?= e(t('Delete')) ?></th>
+                        <th scope="col" class="app-col-optional"><?= e(t('Lithernet ID')) ?></th>
+                        <th scope="col" class="app-cell-left"><?= e(t('Elements')) ?></th>
+                        <th scope="col" class="app-col-optional"><?= e(t('Photo')) ?></th>
+                        <th scope="col"><?= e(t('Actions')) ?></th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php if ($codes === []): ?>
-                    <tr><td colspan="8"><?= e(t('No codes yet.')) ?></td></tr>
+                    <tr><td colspan="6" class="app-cell-center"><?= e(t('No codes yet.')) ?></td></tr>
                 <?php endif; ?>
                 <?php foreach ($codes as $row):
                     $c     = (string) $row['code'];
@@ -42,20 +40,20 @@
                     $types = array_map(static fn (string $t): string => elementTypeLabel($t), $types);
                 ?>
                     <tr>
-                        <td><?= e($row['name']) ?></td>
-                        <td class="app-code"><?= e($c) ?></td>
-                        <td><?= (int) $row['lithernet_id'] ?></td>
-                        <td class="app-cell-left">
+                        <td class="app-cell-left app-cell-name" data-label="<?= e(t('Name')) ?>"><?= e($row['name']) ?></td>
+                        <td class="app-code" data-label="<?= e(t('Code')) ?>"><?= e($c) ?></td>
+                        <td class="app-col-optional" data-label="<?= e(t('Lithernet ID')) ?>"><?= (int) $row['lithernet_id'] ?></td>
+                        <td class="app-cell-left" data-label="<?= e(t('Elements')) ?>">
                             <?php if ($types === []): ?>
                                 <span class="app-muted"><?= e(t('none')) ?></span>
                             <?php else: ?>
-                                <?= (int) $row['element_count'] ?>: <?= e(implode(', ', $types)) ?>
+                                <span class="app-count"><?= (int) $row['element_count'] ?></span> <?= e(implode(', ', $types)) ?>
                             <?php endif; ?>
                         </td>
-                        <td><?= (int) $row['has_image'] > 0 ? e(t('yes')) : '&ndash;' ?></td>
-                        <td><a class="app-icon-link" href="admin.php?site=edit&amp;code=<?= e($c) ?>" title="<?= e(t('Edit')) ?> <?= e($c) ?>"><?= icon('pencil') ?><span class="visually-hidden"><?= e(t('Edit')) ?></span></a></td>
-                        <td><a class="app-icon-link" href="admin.php?site=print&amp;code=<?= e($c) ?>" title="<?= e(t('Print')) ?> <?= e($c) ?>"><?= icon('printer') ?><span class="visually-hidden"><?= e(t('Print')) ?></span></a></td>
-                        <td>
+                        <td class="app-col-optional" data-label="<?= e(t('Photo')) ?>"><?= (int) $row['has_image'] > 0 ? e(t('yes')) : '&ndash;' ?></td>
+                        <td class="app-actions" data-label="<?= e(t('Actions')) ?>">
+                            <a class="app-icon-link" href="admin.php?site=edit&amp;code=<?= e($c) ?>" title="<?= e(t('Edit')) ?> <?= e($c) ?>"><?= icon('pencil') ?><span class="visually-hidden"><?= e(t('Edit')) ?></span></a>
+                            <a class="app-icon-link" href="admin.php?site=print&amp;code=<?= e($c) ?>" title="<?= e(t('Print')) ?> <?= e($c) ?>"><?= icon('printer') ?><span class="visually-hidden"><?= e(t('Print')) ?></span></a>
                             <form action="admin.php?site=delete" method="post" data-confirm="<?= e(t('Delete code {code} ({name}) with all its elements?', ['code' => $c, 'name' => $row['name']])) ?>">
                                 <?= csrfField() ?>
                                 <input type="hidden" name="code" value="<?= e($c) ?>">

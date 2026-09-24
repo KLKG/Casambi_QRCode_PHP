@@ -6,7 +6,27 @@
  * so that the Content-Security-Policy can stay at style-src 'self'.
  */
 
+/* ---- Layout below the fixed navigation --------------------------------- */
+/* The theme assumes a 50 px navbar; ours is taller and wraps on small screens.
+   app.js measures the real height and sets --nav-height on <html>. */
+:root {
+    --nav-height: 7rem;
+}
+body {
+    padding-top: var(--nav-height);
+}
+.startscreen {
+    padding-top: 3rem !important;
+    min-height: calc(100vh - var(--nav-height));
+}
+
 /* ---- Navigation ------------------------------------------------------- */
+/* The theme's navbar grows to 1.5rem padding on large screens and only shrinks
+   with its own scroll script, which this app does not ship: keep it compact. */
+#mainNav {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
 .app-nav {
     justify-content: flex-start;
     gap: 0.25rem;
@@ -98,16 +118,115 @@
 }
 
 /* ---- Code list -------------------------------------------------------- */
+/* Tables fill their container; a scrollbar appears only when it really cannot fit,
+   and then it is visible on the dark-on-green background. */
+.app-table-wrap,
+.table-responsive {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.8) rgba(0, 0, 0, 0.15);
+}
+.app-table-wrap::-webkit-scrollbar,
+.table-responsive::-webkit-scrollbar {
+    height: 10px;
+}
+.app-table-wrap::-webkit-scrollbar-track,
+.table-responsive::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+}
+.app-table-wrap::-webkit-scrollbar-thumb,
+.table-responsive::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+}
 .app-table {
+    width: 100%;
     margin: 0 auto;
-    min-width: 60vw;
     border-collapse: collapse;
 }
 .app-table th,
 .app-table td {
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 0.6rem;
     text-align: center;
     vertical-align: middle;
+}
+.app-table .app-cell-left {
+    text-align: left;
+}
+.app-table .app-cell-center {
+    text-align: center;
+}
+.app-cell-name {
+    font-weight: 600;
+}
+.app-count {
+    display: inline-block;
+    min-width: 1.6rem;
+    padding: 0 0.4rem;
+    margin-right: 0.25rem;
+    border-radius: 0.8rem;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+}
+.app-actions {
+    white-space: nowrap;
+}
+.app-actions form {
+    display: inline;
+}
+.app-actions .app-icon-link {
+    padding: 0.35rem;
+}
+@media (max-width: 767.98px) {
+    .app-col-optional {
+        display: none;
+    }
+}
+/* Phones: one card per row, labels from data-label */
+@media (max-width: 575.98px) {
+    .app-table-stack,
+    .app-table-stack tbody,
+    .app-table-stack tr,
+    .app-table-stack td {
+        display: block;
+        width: 100%;
+    }
+    .app-table-stack thead {
+        display: none;
+    }
+    .app-table-stack tbody tr {
+        margin-bottom: 0.75rem;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 12px;
+        border-top-width: 1px !important;
+    }
+    .app-table-stack td {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.3rem 0;
+        text-align: right;
+    }
+    .app-table-stack td::before {
+        content: attr(data-label);
+        flex: 0 0 auto;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        opacity: 0.8;
+    }
+    .app-table-stack td.app-cell-left,
+    .app-table-stack td.app-actions {
+        text-align: right;
+    }
+    .app-table-stack .app-col-optional {
+        display: flex;
+    }
 }
 .app-table thead tr {
     border-bottom: medium solid #fff;
@@ -298,6 +417,34 @@
 .app-buttons .btn.is-active {
     background: #fff;
     color: #1abc9c;
+}
+
+/* ---- First admin account ----------------------------------------------- */
+.app-card-narrow {
+    width: 100%;
+    max-width: 480px;
+    text-align: left;
+}
+.app-intro {
+    margin: 0 0 1.25rem;
+    text-align: center;
+    line-height: 1.5;
+}
+.app-field-stack {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.app-field-stack > label {
+    font-size: 0.95rem;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+    opacity: 1;
+}
+.app-field-stack .app-hint {
+    display: block;
+    margin: 0.25rem 0 0;
+    font-size: 0.8rem;
 }
 
 /* ---- Admin edit page --------------------------------------------------- */
