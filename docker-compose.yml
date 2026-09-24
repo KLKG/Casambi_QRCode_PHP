@@ -1,4 +1,6 @@
+# Einmalig: cp .env.example .env und Passwörter setzen
 # Start:  docker compose up -d --build
+# Update: docker/update.sh (holt neue Quellen von GitHub und baut neu)
 # Web:    https://<IP-des-Boards>:8443  (HTTP 8080 leitet auf HTTPS um)
 services:
   app:
@@ -23,10 +25,10 @@ services:
     ports:
       - "127.0.0.1:3307:3306"
     environment:
-      MARIADB_ROOT_PASSWORD: bitte-aendern-root
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?DB_ROOT_PASSWORD in .env setzen}
       MARIADB_DATABASE: lithernet
       MARIADB_USER: lithernet
-      MARIADB_PASSWORD: bitte-aendern
+      MARIADB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD in .env setzen}
     volumes:
       - db-data:/var/lib/mysql
     restart: unless-stopped

@@ -17,3 +17,6 @@ Thumbs.db
 
 # Docker: selbst erzeugtes Zertifikat
 /config/ssl/
+
+# Docker: lokale Passwörter
+/.env
