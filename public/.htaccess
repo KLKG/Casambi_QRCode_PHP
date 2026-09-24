@@ -1,0 +1,13 @@
+# Document root of the application.
+Options -Indexes
+
+# WebAssembly needs the correct MIME type for streaming compilation in the browser.
+AddType application/wasm .wasm
+AddType font/woff2 .woff2
+AddType font/woff .woff
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(wasm|woff2?|css|js|svg|png|ico)$">
+        Header set Cache-Control "public, max-age=604800"
+    </FilesMatch>
+</IfModule>

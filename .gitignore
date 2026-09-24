@@ -1,0 +1,19 @@
+# Local configuration with credentials, optional setup protection key
+/config/config.php
+/config/config.php.*.tmp
+/config/setup.key
+
+# Composer dependencies
+/vendor/
+
+# Logs
+/logs/*
+!/logs/.gitkeep
+!/logs/.htaccess
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+
+# Docker: selbst erzeugtes Zertifikat
+/config/ssl/

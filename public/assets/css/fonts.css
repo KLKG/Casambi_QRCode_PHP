@@ -1,0 +1,62 @@
+/*
+ * Self-hosted web fonts (SIL Open Font License 1.1):
+ *   Montserrat v23 – https://fonts.google.com/specimen/Montserrat
+ *   Lato v22       – https://fonts.google.com/specimen/Lato
+ * Only WOFF2 and WOFF are shipped; EOT, SVG and TTF were dropped (legacy IE / old iOS only).
+ */
+
+/* montserrat-regular - latin */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/montserrat-v23-latin-regular.woff2') format('woff2'),
+         url('../fonts/montserrat-v23-latin-regular.woff') format('woff');
+}
+/* montserrat-700 - latin */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/montserrat-v23-latin-700.woff2') format('woff2'),
+         url('../fonts/montserrat-v23-latin-700.woff') format('woff');
+}
+
+/* lato-regular - latin */
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/lato-v22-latin-regular.woff2') format('woff2'),
+         url('../fonts/lato-v22-latin-regular.woff') format('woff');
+}
+/* lato-italic - latin */
+@font-face {
+    font-family: 'Lato';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/lato-v22-latin-italic.woff2') format('woff2'),
+         url('../fonts/lato-v22-latin-italic.woff') format('woff');
+}
+/* lato-700 - latin */
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/lato-v22-latin-700.woff2') format('woff2'),
+         url('../fonts/lato-v22-latin-700.woff') format('woff');
+}
+/* lato-700italic - latin */
+@font-face {
+    font-family: 'Lato';
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url('../fonts/lato-v22-latin-700italic.woff2') format('woff2'),
+         url('../fonts/lato-v22-latin-700italic.woff') format('woff');
+}

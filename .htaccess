@@ -1,0 +1,10 @@
+# Fallback for hosts where the document root cannot be pointed at public/:
+# every request is routed into public/, so src/, config/, database/ etc. are never
+# reachable directly. If your document root already is public/, this file is not used.
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} !(^|/)public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

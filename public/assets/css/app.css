@@ -1,0 +1,607 @@
+/*
+ * Casambi QR-Code – application styles.
+ * style.css holds the Start Bootstrap "Freelancer" theme (Bootstrap 5.1.3); this file adds
+ * everything specific to this app: navigation, icons, flash messages, forms, tables, scanner
+ * and the slider controls (formerly slider.css). No inline styles are used in the templates
+ * so that the Content-Security-Policy can stay at style-src 'self'.
+ */
+
+/* ---- Navigation ------------------------------------------------------- */
+.app-nav {
+    justify-content: flex-start;
+    gap: 0.25rem;
+}
+.app-brand-logo {
+    height: 3rem;
+}
+.app-nav form {
+    margin-left: auto;
+}
+.app-nav .btn-link {
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 0;
+}
+
+/* ---- Inline SVG icons (Bootstrap Icons) -------------------------------- */
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    fill: currentColor;
+}
+
+/* ---- Flash messages --------------------------------------------------- */
+.app-flash {
+    max-width: 700px;
+    margin: 1.5rem auto 0;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+.app-flash-error {
+    background: rgba(220, 53, 69, 0.35);
+}
+.app-flash-success {
+    background: rgba(26, 188, 156, 0.4);
+}
+.app-flash code {
+    color: #fff;
+}
+
+/* ---- Text inputs and selects styled like the outline buttons ---------- */
+.app-text-input,
+.app-select {
+    min-width: 16rem;
+    max-width: 90vw;
+    text-align: center;
+}
+.app-select option {
+    color: #212529;
+}
+.app-text-input[readonly] {
+    opacity: 0.85;
+}
+
+/* ---- Edit form -------------------------------------------------------- */
+.app-form {
+    max-width: 700px;
+}
+.app-form .app-field {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1rem;
+}
+.app-form label {
+    min-width: 9rem;
+    text-align: right;
+}
+.app-form .btn + .btn {
+    margin-left: 0.5rem;
+}
+.app-hint {
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+@media (max-width: 575.98px) {
+    .app-form label {
+        width: 100%;
+        min-width: 0;
+        text-align: center;
+    }
+}
+
+/* ---- Code list -------------------------------------------------------- */
+.app-table {
+    margin: 0 auto;
+    min-width: 60vw;
+    border-collapse: collapse;
+}
+.app-table th,
+.app-table td {
+    padding: 0.5rem 0.75rem;
+    text-align: center;
+    vertical-align: middle;
+}
+.app-table thead tr {
+    border-bottom: medium solid #fff;
+}
+.app-table tbody tr + tr {
+    border-top: thin solid #fff;
+}
+.app-table form {
+    display: inline;
+}
+.app-code {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    letter-spacing: 0.05em;
+}
+.app-icon-link {
+    display: inline-block;
+    padding: 0.5rem;
+    color: #fff;
+    font-size: 1.25rem;
+    line-height: 1;
+    background: none;
+    border: 0;
+}
+.app-icon-link:hover,
+.app-icon-link:focus-visible {
+    color: #1abc9c;
+}
+
+/* ---- QR scanner ------------------------------------------------------- */
+.app-reader {
+    width: min(90vw, 480px);
+}
+.app-reader video {
+    display: block;
+    width: 100%;
+    border-radius: 12px;
+    background: #000;
+}
+.app-reader-status {
+    margin-top: 1rem;
+    text-align: center;
+}
+.app-reader-status.is-error {
+    color: #ffd6d6;
+}
+
+/* ---- Slider page ------------------------------------------------------ */
+.app-control-meta {
+    opacity: 0.85;
+}
+.app-control-status {
+    min-height: 1.5rem;
+    opacity: 0.9;
+}
+.app-control-status.is-error {
+    color: #ffd6d6;
+}
+.app-control-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.slider {
+    box-sizing: border-box;
+    width: 90vw;
+    max-width: 700px;
+    min-height: 60px;
+    padding: 30px 30px 30px 40px;
+    background: #1abc9c;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 15px 40px #7e6d5766;
+}
+.slider label,
+.slider output {
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: #fff;
+}
+.slider label {
+    min-width: 5.5rem;
+    padding-right: 1rem;
+    text-align: left;
+}
+.slider output {
+    min-width: 4.5rem;
+    padding-left: 30px;
+    text-align: right;
+}
+.slider input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 2px;
+    margin: 0;
+    background: #fff;
+    border: none;
+    outline: none;
+}
+.slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.slider input[type="range"]::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.slider input[type="range"]:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 8px;
+}
+@media (max-width: 575.98px) {
+    .slider {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 20px;
+    }
+    .slider label,
+    .slider output {
+        font-size: 20px;
+    }
+    .slider output {
+        margin-left: auto;
+        padding-left: 0;
+    }
+    .slider input[type="range"] {
+        order: 3;
+        flex-basis: 100%;
+    }
+}
+
+/* ---- Control page: elements, buttons, photo --------------------------- */
+.app-nav-inline {
+    margin: 0;
+}
+.app-photo {
+    display: block;
+    max-width: min(90vw, 700px);
+    max-height: 50vh;
+    width: auto;
+    height: auto;
+    margin: 0 auto 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px #7e6d5766;
+}
+.app-photo-small {
+    max-width: 240px;
+    max-height: 240px;
+    margin: 0;
+}
+.app-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 0 auto 2rem;
+    max-width: 700px;
+}
+.app-element-title {
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+.app-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+.app-buttons .btn.is-active {
+    background: #fff;
+    color: #1abc9c;
+}
+
+/* ---- Admin edit page --------------------------------------------------- */
+.app-edit-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+.app-card {
+    max-width: 900px;
+    margin: 1.5rem auto 0;
+    padding: 1.25rem 1.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 20px;
+}
+.app-card-title {
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 0 1rem;
+}
+.app-form-wide .app-field {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1rem;
+}
+.app-form-wide .app-field > label {
+    min-width: 9rem;
+    text-align: right;
+}
+.app-photo-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+.app-photo-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+.app-photo-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.app-file {
+    color: #fff;
+    max-width: 90vw;
+}
+.app-element-row {
+    margin: 0 0 1rem;
+    padding: 0.75rem 1rem 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 12px;
+}
+.app-element-row legend {
+    float: none;
+    width: auto;
+    padding: 0 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.app-element-new {
+    border-style: dashed;
+}
+.app-element-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.75rem 1rem;
+}
+.app-field-sm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 7rem;
+}
+.app-field-sm > label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.85;
+}
+.app-field-grow {
+    flex: 1 1 14rem;
+}
+.app-field-check {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+.app-field-check > label {
+    font-size: 0.95rem;
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: 1;
+}
+.app-input {
+    width: 100%;
+    padding: 0.45rem 0.6rem;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    font: inherit;
+}
+.app-input:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+.app-input option {
+    color: #212529;
+}
+.app-hint-left {
+    text-align: left;
+    margin: 0.5rem 0 0;
+}
+.app-cell-left {
+    text-align: left;
+}
+.app-muted {
+    opacity: 0.7;
+}
+
+/* ---- Setup wizard ------------------------------------------------------ */
+.app-req {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.app-req li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 1rem;
+    padding: 0.4rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.app-req li:first-child {
+    border-top: 0;
+}
+.app-req-state {
+    min-width: 4.5rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.15);
+}
+.app-req li.is-ok .app-req-state {
+    background: rgba(26, 188, 156, 0.6);
+}
+.app-req li.is-warn .app-req-state {
+    background: rgba(255, 193, 7, 0.6);
+}
+.app-req li.is-fail .app-req-state {
+    background: rgba(220, 53, 69, 0.7);
+}
+.app-req-label {
+    font-weight: 600;
+    min-width: 14rem;
+}
+.app-req-detail {
+    opacity: 0.85;
+    font-size: 0.9rem;
+}
+.app-grid-center {
+    justify-content: center;
+}
+.app-card code {
+    color: #fff;
+}
+
+/* ---- Admin tabs and language switcher ---------------------------------- */
+.app-tab.is-active {
+    background: rgba(255, 255, 255, 0.18);
+}
+.app-lang {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    padding-left: 0.75rem;
+}
+.app-lang-link {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+.app-lang-link:hover,
+.app-lang-link:focus-visible {
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+}
+.app-lang-link.is-active {
+    background: #fff;
+    color: #2c3e50;
+}
+
+/* ---- Settings page ----------------------------------------------------- */
+.app-setting {
+    display: grid;
+    grid-template-columns: minmax(10rem, 1fr) minmax(0, 2fr);
+    gap: 0.25rem 1rem;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.app-setting:first-of-type {
+    border-top: 0;
+}
+.app-setting-label {
+    font-weight: 600;
+}
+.app-setting-input {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.app-setting .app-hint-left {
+    grid-column: 1 / -1;
+    margin: 0;
+}
+.app-source {
+    flex: 0 0 auto;
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(255, 255, 255, 0.15);
+}
+.app-source-database {
+    background: rgba(26, 188, 156, 0.6);
+}
+@media (max-width: 575.98px) {
+    .app-setting {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---- Translation editor ------------------------------------------------ */
+.app-translate {
+    max-width: 1100px;
+}
+.app-tr-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0.5rem 1.5rem;
+    padding: 0.6rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.app-tr-row:first-child {
+    border-top: 0;
+}
+.app-tr-row.is-missing .app-tr-text::before {
+    content: "\25CB\00a0";
+    opacity: 0.7;
+}
+.app-tr-text {
+    text-align: left;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+.app-tr-files {
+    text-align: left;
+    font-size: 0.75rem;
+    opacity: 0.6;
+}
+.app-tr-input {
+    resize: vertical;
+    min-height: 2.4rem;
+}
+@media (max-width: 767.98px) {
+    .app-tr-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---- QR print page ---------------------------------------------------- */
+.app-qr {
+    max-width: 90vw;
+    height: auto;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 12px;
+}

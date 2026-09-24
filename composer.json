@@ -1,0 +1,18 @@
+{
+    "name": "lithernet/casambi-qrcode-php",
+    "description": "Generate and manage QR codes to control Casambi lighting locally via the Lithernet Casambi Gateway.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.2",
+        "ext-gd": "*",
+        "ext-mbstring": "*",
+        "ext-mysqli": "*",
+        "ext-sockets": "*",
+        "chillerlan/php-qrcode": "^6.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}

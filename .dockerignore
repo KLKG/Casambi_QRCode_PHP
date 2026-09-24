@@ -1,0 +1,8 @@
+.git
+vendor
+config/config.php
+config/setup.key
+config/ssl
+logs/*
+!logs/.gitkeep
+!logs/.htaccess
